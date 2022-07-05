@@ -25,4 +25,4 @@ jobs:
       with:
         context: .
         push: true
-        tags: smarterdm/docker-node-gettext-awscli:latest; smarterdm/docker-node-gettext-awscli:${{ github.run_number }};
+        tags: smarterdm/docker-node-gettext-awscli:latest; smarterdm/docker-node-gettext-awscli:${{ github.run_number }}
