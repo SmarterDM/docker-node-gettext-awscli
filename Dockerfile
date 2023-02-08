@@ -1,7 +1,7 @@
 FROM node:16.19.0
 
 RUN apt-get update
-RUN apt-get -y install python3-pip gettext ca-certificates curl gnupg lsb-release groff less rustc
+RUN apt-get -y install python3-pip gettext ca-certificates curl gnupg lsb-release groff less
 RUN mkdir -p /etc/apt/keyrings
 RUN curl -fsSL https://download.docker.com/linux/debian/gpg | gpg --dearmor -o /etc/apt/keyrings/docker.gpg
 RUN echo \
@@ -10,7 +10,5 @@ RUN echo \
 RUN apt-get update
 RUN apt-cache policy docker-ce
 RUN apt-get -y install docker-ce docker-ce-cli
-RUN echo "cryptography==3.3.2" > /tmp/requirements.txt
 RUN pip3 install "pip>=20"
-RUN pip3 install docker-compose==1.28.6 awscli -r /tmp/requirements.txt
-RUN rm /tmp/requirements.txt
+RUN pip3 install docker-compose==1.28.6 awscli
