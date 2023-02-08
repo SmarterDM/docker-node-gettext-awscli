@@ -1,7 +1,8 @@
 FROM node:16.19.0
 
+ENV CRYPTOGRAPHY_DONT_BUILD_RUST=1
 RUN apt-get update
-RUN apt-get -y install python3-pip gettext ca-certificates curl gnupg lsb-release groff less rustc
+RUN apt-get -y install python3-pip gettext ca-certificates curl gnupg lsb-release groff less
 RUN mkdir -p /etc/apt/keyrings
 RUN curl -fsSL https://download.docker.com/linux/debian/gpg | gpg --dearmor -o /etc/apt/keyrings/docker.gpg
 RUN echo \
