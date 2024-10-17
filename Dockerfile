@@ -9,6 +9,23 @@ RUN echo \
       $(lsb_release -cs) stable" | tee /etc/apt/sources.list.d/docker.list > /dev/null
 RUN apt-get update
 RUN apt-cache policy docker-ce
-RUN apt-get -y install docker-ce docker-ce-cli
-RUN apt-get update && apt-get install -y python3 python3-pip
-RUN pip3 install --break-system-packages docker-compose==1.28.6 awscli
+
+# Remove unnecessary Python installations if not needed elsewhere
+# RUN apt-get install -y python3 python3-pip
+
+# Install docker-ce and docker-ce-cli
+RUN apt-get update && apt-get install -y docker-ce docker-ce-cli
+
+# Install Docker Compose plugin
+RUN apt-get install -y docker-compose-plugin
+
+# Install dependencies for AWS CLI
+RUN apt-get install -y curl unzip
+
+# Install AWS CLI v2
+RUN curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+RUN unzip awscliv2.zip
+RUN ./aws/install
+
+# Clean up installation files
+RUN rm -rf awscliv2.zip aws
