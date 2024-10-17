@@ -1,4 +1,4 @@
-FROM node:16.19.0
+FROM node:18.20.4
 
 RUN apt-get update
 RUN apt-get -y install python3-pip gettext ca-certificates curl gnupg lsb-release groff less
