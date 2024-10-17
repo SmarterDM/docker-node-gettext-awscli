@@ -11,4 +11,4 @@ RUN apt-get update
 RUN apt-cache policy docker-ce
 RUN apt-get -y install docker-ce docker-ce-cli
 RUN apt-get update && apt-get install -y python3 python3-pip
-RUN pip3 install docker-compose==1.28.6 awscli
+RUN pip3 install --break-system-packages docker-compose==1.28.6 awscli
