@@ -28,10 +28,17 @@ RUN apt-get update && apt-get install -y \
     docker-ce-cli \
     docker-compose-plugin
 
-# Install AWS CLI v2
-RUN curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" \
-    && unzip awscliv2.zip \
-    && ./aws/install
+# Install AWS CLI v2 based on architecture
+RUN arch=$(uname -m) && \
+    if [ "$arch" = "x86_64" ]; then \
+        curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"; \
+    elif [ "$arch" = "aarch64" ]; then \
+        curl "https://awscli.amazonaws.com/awscli-exe-linux-aarch64.zip" -o "awscliv2.zip"; \
+    else \
+        echo "Unsupported architecture: $arch" && exit 1; \
+    fi && \
+    unzip awscliv2.zip && \
+    ./aws/install
 
 # Clean up installation files and apt cache
 RUN rm -rf awscliv2.zip aws \
